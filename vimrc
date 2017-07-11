@@ -29,6 +29,7 @@ set hlsearch
 
 set showmatch
 
+" ***NerdTree***
 " Unfold tree node
 let NERDTreeMapActivateNode='<right>'
 let NERDTreeShowHidden=1
@@ -41,3 +42,6 @@ autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 " Ignore unwanted files
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
+
+" Gitgutter: Always show
+let g:gitgutter_sign_column_always=1
