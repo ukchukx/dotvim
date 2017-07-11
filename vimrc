@@ -45,3 +45,7 @@ let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
 
 " Gitgutter: Always show
 let g:gitgutter_sign_column_always=1
+
+" Highlight syntax from the beginning
+"autocmd FileType vue syntax sync fromstart
+autocmd BufEnter * :syntax sync fromstart
