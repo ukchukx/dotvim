@@ -9,3 +9,4 @@ set colorcolumn=120
 set number
 
 let mapleader=" "
+map <leader>s :source ~/.vimrc<CR>
