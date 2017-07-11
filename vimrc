@@ -2,11 +2,11 @@ execute pathogen#infect()
 
 filetype on
 syntax on
-set background=light
+set background=dark
 colorscheme solarized
 
 set guifont=Menlo\ Regular:h18
-set lines=35 columns=150
+set lines=35 columns=130
 set colorcolumn=120
 set number
 
