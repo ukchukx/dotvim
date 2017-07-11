@@ -29,3 +29,15 @@ set hlsearch
 
 set showmatch
 
+" Unfold tree node
+let NERDTreeMapActivateNode='<right>'
+let NERDTreeShowHidden=1
+" Display tree
+nmap <leader>n :NERDTreeToggle<CR>
+" Locate focused file in tree
+nmap <leader>j :NERDTreeFind<CR>
+" Always open tree, but don't focus it
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+" Ignore unwanted files
+let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
