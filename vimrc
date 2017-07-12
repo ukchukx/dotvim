@@ -2,13 +2,15 @@ execute pathogen#infect()
 
 filetype on
 syntax on
-set background=dark
+set background=light
+let g:solarized_termcolors=256
 colorscheme solarized
 
 set guifont=Menlo\ Regular:h18
 set lines=35 columns=130
 set colorcolumn=120
 set number
+set encoding=utf-8
 
 let mapleader=" "
 map <leader>s :source ~/.vimrc<CR>
