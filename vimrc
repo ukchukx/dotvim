@@ -4,6 +4,8 @@ filetype on
 syntax on
 set background=light
 let g:solarized_termcolors=256
+set t_Co=256
+let g:airline_powerline_fonts=1
 colorscheme solarized
 
 set guifont=Menlo\ Regular:h18
