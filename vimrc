@@ -7,7 +7,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 "set guifont=Menlo\ Regular:h18
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book:h11
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h11
 set lines=30 columns=120
 set colorcolumn=120
 
@@ -75,8 +75,8 @@ let g:gitgutter_sign_column_always=1
 autocmd BufEnter * :syntax sync fromstart
 
 " ***Airline***
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 
 let python_highlight_all=1
