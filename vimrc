@@ -4,8 +4,6 @@ filetype on
 syntax on
 set background=light
 let g:solarized_termcolors=256
-set t_Co=256
-let g:airline_powerline_fonts=1
 colorscheme solarized
 
 set guifont=Menlo\ Regular:h18
@@ -15,6 +13,9 @@ set colorcolumn=120
 " Enable line numbering
 set number
 set encoding=utf-8
+
+" Change default octal behaviour for C-a, C-x etc
+set nrformats=
 
 " Set leader key
 let mapleader=" "
@@ -71,3 +72,7 @@ let g:gitgutter_sign_column_always=1
 " Highlight syntax from the beginning
 "autocmd FileType vue syntax sync fromstart
 autocmd BufEnter * :syntax sync fromstart
+
+" ***Airline***
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
