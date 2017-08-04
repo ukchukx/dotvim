@@ -47,6 +47,12 @@ set showmatch
 let NERDTreeMapActivateNode='<right>'
 let NERDTreeShowHidden=1
 
+" Close Vim if the only window left is NerdTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Delete buffer of deleted file
+let NERDTreeAutoDeleteBuffer=1
+
 " Display tree
 nmap <leader>n :NERDTreeToggle<CR>
 " Locate focused file in tree
