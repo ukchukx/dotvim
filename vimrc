@@ -6,7 +6,8 @@ set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
 
-set guifont=Menlo\ Regular:h18
+"set guifont=Menlo\ Regular:h18
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book:h11
 set lines=30 columns=120
 set colorcolumn=120
 
