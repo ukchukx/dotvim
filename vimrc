@@ -7,7 +7,7 @@ let g:solarized_termcolors=256
 colorscheme solarized
 
 set guifont=Menlo\ Regular:h18
-set lines=35 columns=130
+set lines=20 columns=120
 set colorcolumn=120
 set number
 set encoding=utf-8
