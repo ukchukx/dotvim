@@ -9,15 +9,22 @@ colorscheme solarized
 set guifont=Menlo\ Regular:h18
 set lines=20 columns=120
 set colorcolumn=120
+
+" Enable line numbering
 set number
 set encoding=utf-8
 
+" Set leader key
 let mapleader=" "
+
+" Reload Vim config without having to restart editor
 map <leader>s :source ~/.vimrc<CR>
 
+" Keep more info in memory to speed things up
 set hidden
 set history=100
 
+" Indentation settings
 filetype indent on
 set nowrap
 set tabstop=2
@@ -26,15 +33,20 @@ set expandtab
 set smartindent
 set autoindent
 
+" Remove whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Highlight found words when running a search
 set hlsearch
 
+" Highlight matching parentheses
 set showmatch
 
 " ***NerdTree***
 " Unfold tree node
 let NERDTreeMapActivateNode='<right>'
 let NERDTreeShowHidden=1
+
 " Display tree
 nmap <leader>n :NERDTreeToggle<CR>
 " Locate focused file in tree
