@@ -65,7 +65,7 @@ nmap <leader>j :NERDTreeFind<CR>
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 " Ignore unwanted files
-let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
+let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.pyc$']
 
 " Gitgutter: Always show
 let g:gitgutter_sign_column_always=1
@@ -77,3 +77,10 @@ autocmd BufEnter * :syntax sync fromstart
 " ***Airline***
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
+
+
+let python_highlight_all=1
+" Remove extraneous whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+
