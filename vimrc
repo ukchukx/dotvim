@@ -80,7 +80,5 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 let python_highlight_all=1
-" Remove extraneous whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 
