@@ -1,7 +1,14 @@
+set nocompatible
+
 execute pathogen#infect()
+
 
 filetype on
 syntax on
+set pastetoggle=<F2> " disable Vim indents on paste
+set nobackup
+set noswapfile
+set hidden
 set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
@@ -27,12 +34,14 @@ map <leader>s :source ~/.vimrc<CR>
 " Keep more info in memory to speed things up
 set hidden
 set history=100
+set undolevels=100
 
 " Indentation settings
 filetype indent on
 set nowrap
 set tabstop=2
 set shiftwidth=2
+set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab
 set smartindent
 set autoindent
@@ -40,11 +49,12 @@ set autoindent
 " Remove whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Highlight found words when running a search
-set hlsearch
 
-" Highlight matching parentheses
-set showmatch
+set hlsearch " Highlight found words when running a search
+set incsearch " Show search matches as you type
+
+
+set showmatch " Highlight matching parentheses
 
 " ***NerdTree***
 " Unfold tree node
