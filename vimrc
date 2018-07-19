@@ -13,10 +13,12 @@ set hidden
 set background=light
 let g:solarized_termcolors=256
 colorscheme solarized
+set visualbell " don't beep
+" set noerrorbells don't beep
 
 "set guifont=Menlo\ Regular:h18
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h11
-set lines=30 columns=120
+" set lines=30 columns=120
 set colorcolumn=120
 
 if $COLORTERM == 'gnome-terminal'
@@ -92,6 +94,7 @@ let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.swo', '\.pyc$']
 
 " Gitgutter: Always show
 set signcolumn=yes
+let g:gitgutter_terminal_reports_focus=0
 
 " Highlight syntax from the beginning
 "autocmd FileType vue syntax sync fromstart
@@ -128,6 +131,7 @@ let g:jedi#smart_auto_mappings = 0
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
+let g:syntastic_auto_jump = 0
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
