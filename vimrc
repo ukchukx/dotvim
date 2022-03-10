@@ -11,8 +11,7 @@ set noswapfile
 set title
 set hidden
 set background=light
-let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme material
 set visualbell " don't beep
 " set noerrorbells don't beep
 

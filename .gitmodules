@@ -64,3 +64,6 @@
 [submodule "bundle/emmet-vim"]
 	path = bundle/emmet-vim
 	url = git@github.com:mattn/emmet-vim.git
+[submodule "bundle/material.vim"]
+	path = bundle/material.vim
+	url = git@github.com:kaicataldo/material.vim.git
