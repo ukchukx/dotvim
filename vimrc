@@ -1,8 +1,5 @@
 set nocompatible
 
-execute pathogen#infect()
-
-
 filetype on
 syntax on
 set pastetoggle=<F2> " disable Vim indents on paste
@@ -10,6 +7,7 @@ set nobackup
 set noswapfile
 set title
 set hidden
+set modeline
 set number " Enable line numbering
 " Set encoding
 set encoding=utf-8
@@ -23,7 +21,7 @@ set visualbell " don't beep
 set colorcolumn=120
 
 " Reload Vim config without having to restart editor
-map <leader>s :source ~/.vimrc<CR>
+map <Leader>s :source ~/.vimrc<CR>
 
 " Keep more info in memory to speed things up
 set hidden
@@ -39,6 +37,18 @@ set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 set expandtab
 set smartindent
 set autoindent
+set exrc " .vimrc in local project dir"
+set secure
+autocmd BufRead,BufNewFile * set signcolumn=yes
+autocmd FileType tagbar,nerdtree set signcolumn=no
+set foldmethod=indent
+set nofoldenable
+set diffopt+=vertical
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+:augroup END
 
 " Remove whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -47,12 +57,10 @@ set hlsearch " Highlight found words when running a search
 set incsearch " Show search matches as you type
 set showmatch " Highlight matching parentheses
 
-" Delete buffer of deleted file
+execute pathogen#infect()
 
-let g:material_theme_style = 'palenight'
-let g:airline_theme = 'material'
-let g:material_terminal_italics = 1
-colorscheme material
+" *****Theming*****
+
 " For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
 if (has('nvim'))
   let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -61,23 +69,59 @@ endif
 " For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
 " Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
 " https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
-if (has('termguicolors'))
+if (has('termguicolors') && $TERM_PROGRAM ==# 'iTerm.app')
   set termguicolors
 endif
 
+set background=dark
+set cursorline
 
+let g:material_theme_style = 'palenight'
+let g:airline_theme = 'material'
+let g:material_terminal_italics = 1
+colorscheme material
+
+"-- Whitespace highlight --
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+"-- ALE --
+hi clear ALEErrorSign
+hi clear ALEWarningSign
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error = '‚úò'
+let g:ale_sign_warning = '‚óã'
+
+let g:ale_linters = {
+            \ 'python': ['pylint'],
+            \ 'javascript': ['eslint'],
+            \ 'go': ['gobuild', 'gofmt'],
+            \ 'rust': ['rls']
+            \}
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'python': ['autopep8'],
+            \ 'javascript': ['eslint'],
+            \ 'go': ['gofmt', 'goimports'],
+            \ 'rust': ['rustfmt']
+            \}
+let g:ale_fix_on_save = 1
 
 " ***NerdTree***
 " Unfold tree node
 let NERDTreeMapActivateNode='<right>'
 let NERDTreeShowHidden=1
+let NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " Close Vim if the only window left is NerdTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-"set guifont=Menlo\ Regular:h18
-" set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h11
+set guifont=Anonymice\ Nerd\ Font\ 12
 " set lines=30 columns=120
 
 if $COLORTERM == 'gnome-terminal'
@@ -89,12 +133,10 @@ else
 endif
 
 
-let NERDTreeAutoDeleteBuffer=1
-
 " Display tree
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <Leader>n :NERDTreeToggle<CR>
 " Locate focused file in tree
-nmap <leader>j :NERDTreeFind<CR>
+nmap <Leader>j :NERDTreeFind<CR>
 " Always open tree, but don't focus it
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
@@ -104,9 +146,9 @@ let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.swo', '\.pyc$']
 " Gitgutter: Always show
 set signcolumn=yes
 let g:gitgutter_terminal_reports_focus=0
+let g:gitgutter_set_sign_backgrounds = 0
 
 " Highlight syntax from the beginning
-"autocmd FileType vue syntax sync fromstart
 autocmd BufEnter * :syntax sync fromstart
 
 
@@ -116,7 +158,7 @@ let g:polyglot_disabled = ['python']
 
 let python_highlight_all = 1
 
-" IndentLine
+" *****IndentLine*****
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
 let g:indentLine_char = '┆'
@@ -127,9 +169,9 @@ if exists("*fugitive#statusline")
 endif
 
 
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline_powerline_fonts = 1
+" *****Airline******
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
 if !exists('g:airline_symbols')
@@ -177,4 +219,32 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
 
+" ******Devicons*****
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+
+
+"-- Exuberant Ctags --
+set tags=tags
+
+
+"-- NVIM configuration --
+if has('nvim')
+    " Enable deoplete when InsertEnter.
+    let g:deoplete#enable_at_startup = 1
+    autocmd InsertEnter * call deoplete#enable()
+
+    set belloff=""
+    call deoplete#custom#source('_',  'max_menu_width', 0)
+    call deoplete#custom#source('_',  'max_abbr_width', 0)
+    call deoplete#custom#source('_',  'max_kind_width', 0)
+
+    set hidden
+    let g:LanguageClient_serverCommands = {
+        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+        \ 'go': ['~/.go/bin/gopls']
+        \ }
+endif
 
