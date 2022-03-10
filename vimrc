@@ -10,36 +10,17 @@ set nobackup
 set noswapfile
 set title
 set hidden
-set background=light
-colorscheme material
-set visualbell " don't beep
-" set noerrorbells don't beep
-
-"set guifont=Menlo\ Regular:h18
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h11
-" set lines=30 columns=120
-set colorcolumn=120
-
-if $COLORTERM == 'gnome-terminal'
-  set term=gnome-256color
-else
-  if $TERM == 'xterm'
-    set term=xterm-256color
-  endif
-endif
-
-
 set number " Enable line numbering
-
 " Set encoding
 set encoding=utf-8
 set fileencoding=utf-8
-
 " Change default octal behaviour for C-a, C-x etc
 set nrformats=
-
 " Set leader key
 let mapleader=" "
+set visualbell " don't beep
+" set noerrorbells don't beep
+set colorcolumn=120
 
 " Reload Vim config without having to restart editor
 map <leader>s :source ~/.vimrc<CR>
@@ -62,12 +43,28 @@ set autoindent
 " Remove whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-
 set hlsearch " Highlight found words when running a search
 set incsearch " Show search matches as you type
-
-
 set showmatch " Highlight matching parentheses
+
+" Delete buffer of deleted file
+
+let g:material_theme_style = 'palenight'
+let g:airline_theme = 'material'
+let g:material_terminal_italics = 1
+colorscheme material
+" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
+  set termguicolors
+endif
+
 
 
 " ***NerdTree***
@@ -78,7 +75,20 @@ let NERDTreeShowHidden=1
 " Close Vim if the only window left is NerdTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Delete buffer of deleted file
+
+"set guifont=Menlo\ Regular:h18
+" set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete:h11
+" set lines=30 columns=120
+
+if $COLORTERM == 'gnome-terminal'
+  set term=gnome-256color
+else
+  if $TERM == 'xterm'
+    set term=xterm-256color
+  endif
+endif
+
+
 let NERDTreeAutoDeleteBuffer=1
 
 " Display tree
@@ -100,47 +110,11 @@ let g:gitgutter_terminal_reports_focus=0
 autocmd BufEnter * :syntax sync fromstart
 
 
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-"" fzf.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-nnoremap <silent> <leader>e :FZF -m<CR>
-
-
 " Syntax highlight
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 
 let python_highlight_all = 1
-
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>N"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
-
-" syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_auto_jump = 0
-
-" syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
 
 " IndentLine
 let g:indentLine_enabled = 1
