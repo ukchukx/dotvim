@@ -88,27 +88,6 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"-- ALE --
-hi clear ALEErrorSign
-hi clear ALEWarningSign
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_sign_error = '‚úò'
-let g:ale_sign_warning = '‚óã'
-
-let g:ale_linters = {
-            \ 'python': ['pylint'],
-            \ 'javascript': ['eslint'],
-            \ 'go': ['gobuild', 'gofmt'],
-            \ 'rust': ['rls']
-            \}
-let g:ale_fixers = {
-            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \ 'python': ['autopep8'],
-            \ 'javascript': ['eslint'],
-            \ 'go': ['gofmt', 'goimports'],
-            \ 'rust': ['rustfmt']
-            \}
-let g:ale_fix_on_save = 1
 
 " ***NerdTree***
 " Unfold tree node
@@ -228,23 +207,3 @@ let g:webdevicons_enable_airline_statusline = 1
 
 "-- Exuberant Ctags --
 set tags=tags
-
-
-"-- NVIM configuration --
-if has('nvim')
-    " Enable deoplete when InsertEnter.
-    let g:deoplete#enable_at_startup = 1
-    autocmd InsertEnter * call deoplete#enable()
-
-    set belloff=""
-    call deoplete#custom#source('_',  'max_menu_width', 0)
-    call deoplete#custom#source('_',  'max_abbr_width', 0)
-    call deoplete#custom#source('_',  'max_kind_width', 0)
-
-    set hidden
-    let g:LanguageClient_serverCommands = {
-        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-        \ 'go': ['~/.go/bin/gopls']
-        \ }
-endif
-

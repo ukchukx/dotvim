@@ -55,9 +55,6 @@
 [submodule "bundle/indentline"]
 	path = bundle/indentline
 	url = git@github.com:yggdroot/indentline.git
-[submodule "bundle/vim-polyglot"]
-	path = bundle/vim-polyglot
-	url = git@github.com:sheerun/vim-polyglot.git
 [submodule "bundle/vim-css-color"]
 	path = bundle/vim-css-color
 	url = git@github.com:ap/vim-css-color.git
